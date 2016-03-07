@@ -1,0 +1,7 @@
+#!/bin/bash
+
+problem=$1
+
+wget https://open.kattis.com/problems/$problem/file/statement/samples.zip
+unzip samples.zip -d samples
+rm samples.zip
