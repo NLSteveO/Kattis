@@ -1,0 +1,10 @@
+#!/bin/bash
+
+language=$1
+problem=$2
+
+if [ `echo $language | tr [:upper:] [:lower:]` == "java" ]; then
+    mkdir ~/Kattis/Java/$problem
+    cd ~/Kattis/Java/$problem
+    ../../downloadSamples $problem
+fi
