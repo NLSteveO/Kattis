@@ -6,10 +6,10 @@ problem=`echo $filename | tr [:upper:] [:lower:]`
 
 if [ `echo $language | tr [:upper:] [:lower:]` == "java" ]; then
     javaFilename="$filename.java"
-
-    mkdir ~/Kattis/Java/$problem
-    cd ~/Kattis/Java/$problem
-    ../../downloadSamples $problem
+    directory=~/Kattis/Java/$problem
+    mkdir $directory
+    cd $directory
+    ../../downloadSamples $problem $directory
     touch $javaFilename
     cat >$javaFilename <<EOF
 import java.util.Scanner;
