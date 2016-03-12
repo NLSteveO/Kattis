@@ -7,7 +7,7 @@ problem=`echo $filename | tr [:upper:] [:lower:]`
 if [ `echo $language | tr [:upper:] [:lower:]` == "java" ]; then
     javaFilename="$filename.java"
     directory=~/Kattis/Java/$problem
-    mkdir $directory
+    mkdir -p $directory
     cd $directory
     ../../downloadSamples $problem $directory
     touch $javaFilename
@@ -21,4 +21,11 @@ public class ${filename} {
     }
 }
 EOF
+elif [ `echo $language | tr [:upper:] [:lower:]` == "python" ]; then
+    pythonFilename="$filename.py"
+    directory=~/Kattis/Python/$problem
+    mkdir -p $directory
+    cd $directory
+    ../../downloadSamples $problem $directory
+    touch $pythonFilename
 fi
