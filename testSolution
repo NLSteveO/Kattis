@@ -6,8 +6,8 @@
 filename="$1"
 problem="${filename,,}"
 
-if [[ -d "~/kattis/java/$problem" ]]; then
-    directory="~/kattis/java/$problem"
+if [[ -d "$HOME/Kattis/Java/$problem" ]]; then
+    directory="$HOME/Kattis/Java/$problem"
     cd "$directory" || exit 1
     javac ./*.java
     exit_status="$?"
@@ -25,7 +25,12 @@ if [[ -d "~/kattis/java/$problem" ]]; then
                 cat "error"
             elif ! cmp -s "output" "${i:0:-3}.ans"; then
                 echo "TEST ${x}: FAIL"
+                echo "Expected Output:"
+                cat "${i:0:-3}.ans"
+                echo ""
+                echo "Actual Output:"
                 cat "output"
+                echo ""
             else
                 echo "TEST ${x}: PASS"
             fi
