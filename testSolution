@@ -41,6 +41,37 @@ if [[ -d "$HOME/Kattis/Java/$problem" ]]; then
     else
         echo "There are no sample files to test!"
     fi
+elif [[ -d "$HOME/Kattis/Python/$problem" ]]; then
+    directory="$HOME/Kattis/Python/$problem"
+    cd "$directory" || exit 1
+    if [[ -d "samples/" ]]; then
+        x=1
+        for i in samples/*.in; do
+            touch "output"
+            touch "error"
+            python "$filename.py" < "$i" > "output" 2> "error"
+            exit_status="$?"
+            if [[ "$exit_status" != 0 ]]; then
+                echo "TEST ${x}: RUNTIME ERROR"
+                cat "error"
+            elif ! cmp -s "output" "${i:0:-3}.ans"; then
+                echo "TEST ${x}: FAIL"
+                echo "Expected Output:"
+                cat "${i:0:-3}.ans"
+                echo ""
+                echo "Actual Output:"
+                cat "output"
+                echo ""
+            else
+                echo "TEST ${x}: PASS"
+            fi
+            rm "output"
+            rm "error"
+            x=$((x+1))
+        done
+    else
+      echo "There are no sample files to test!"
+    fi
 else
     echo "No such file to test."
     exit 1
